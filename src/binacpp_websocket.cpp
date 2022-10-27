@@ -4,7 +4,7 @@
 #include "binacpp_logger.h"
 
 
-
+bool BinaCPP_websocket::running =true;
 struct lws_context *BinaCPP_websocket::context = NULL;
 struct lws_protocols BinaCPP_websocket::protocols[] =
 {
@@ -127,7 +127,7 @@ BinaCPP_websocket::connect_endpoint (
 void 
 BinaCPP_websocket::enter_event_loop() 
 {
-	while( 1 )
+	while( running )
 	{	
 		try {	
 			lws_service( context, 500 );
@@ -138,5 +138,6 @@ BinaCPP_websocket::enter_event_loop()
 	}
 	lws_context_destroy( context );
 }
-
-
+void BinaCPP_websocket::stop_event_loop(){
+	running = false;
+}

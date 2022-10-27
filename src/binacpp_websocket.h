@@ -27,13 +27,15 @@ typedef int (*CB)(Json::Value &json_value );
 
 class BinaCPP_websocket {
 
-
+public:
 	static struct lws_context *context;
 	static struct lws_protocols protocols[]; 
+	static bool running;
+	static void stop_event_loop();
 
 	static map <struct lws *,CB> handles ;
 	
-	public:
+
 		static int  event_cb( struct lws *wsi, enum lws_callback_reasons reason, void *user, void *in, size_t len );
 		static void connect_endpoint(
 			CB user_cb,
