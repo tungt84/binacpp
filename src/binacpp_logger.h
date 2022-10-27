@@ -9,8 +9,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <fcntl.h>
-#include <fnmatch.h>
 
+#ifdef USE_FNMATCH
+#include <fnmatch.h>
+#endif
 
 #include <string>
 #include <iostream>
